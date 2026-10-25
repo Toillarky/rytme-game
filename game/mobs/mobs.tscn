@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://c4jv61jkng0ti"]
+
+[ext_resource type="Texture2D" uid="uid://bbvemb7dbf464" path="res://assets/sprites/slime_green.png" id="1_oi4f5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkgs8"]
+size = Vector2(16, 11)
+
+[sub_resource type="Animation" id="Animation_oi4f5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_7uq7u"]
+resource_name = "fight"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_il224"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.40000004, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ek1ar"]
+_data = {
+&"RESET": SubResource("Animation_oi4f5"),
+&"fight": SubResource("Animation_7uq7u"),
+&"idle": SubResource("Animation_il224")
+}
+
+[node name="mobs" type="CharacterBody2D" unique_id=1339100771]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1639388855]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_qkgs8")
+debug_color = Color(0.91764706, 0, 0.14117648, 0.81960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1538424992]
+libraries/ = SubResource("AnimationLibrary_ek1ar")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=311266144]
+texture_filter = 1
+position = Vector2(0, -12)
+texture = ExtResource("1_oi4f5")
+hframes = 4
+vframes = 3
+frame = 1
